@@ -26,7 +26,8 @@ export default function Navbar() {
             GrowNet
           </span>
         </Link>
-        {/* Nav Links */}
+
+        {/* Nav links */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
@@ -34,13 +35,18 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-1.5 rounded-full text-sm transition-colors duration-200 ${isActive ? "bg-white/15 text-white font-medium" : "text-white/70 hover:text-white hover:gb-white/10"}`}
+                className={`px-4 py-1.5 rounded-full text-sm transition-colors duration-200 ${
+                  isActive
+                    ? "bg-white/15 text-white font-medium"
+                    : "text-white/70 hover:text-white hover:bg-white/10"
+                }`}
               >
                 {link.label}
               </Link>
             );
           })}
         </div>
+
         {/* CTA button */}
         <Link
           href="/plant-trees"
