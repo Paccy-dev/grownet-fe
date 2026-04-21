@@ -1,86 +1,75 @@
-import { MapPin, Trees } from "lucide-react";
+import Image from "next/image";
+import { MapPin, TreePine } from "lucide-react";
 
-type Project = {
-  id: number;
-  title: string;
-  location: string;
-  description: string;
+// This defines the shape of data a ProjectCard expects
+// We'll later replace the hardcoded data with Strapi API data
+type ProjectCardProps = {
   image: string;
   status: "Active" | "Completed";
+  name: string;
+  location: string;
+  description: string;
   treesPlanted: number;
   treesGoal: number;
 };
 
-type Props = {
-  project: Project;
-};
-
-export default function ProjectCard({ project }: Props) {
-  const progress = Math.round((project.treesPlanted / project.treesGoal) * 100);
+export default function ProjectCard({
+  image,
+  status,
+  name,
+  location,
+  description,
+  treesPlanted,
+  treesGoal,
+}: ProjectCardProps) {
+  // Calculate percentage for the progress bar
+  const percentage = Math.round((treesPlanted / treesGoal) * 100);
 
   return (
-    <div className="bg-white rounded-2xl overflow-hidden border border-forest/10 hover:border-forest/25 hover:shadow-lg transition-all duration-300 flex flex-col">
-      {/* Image */}
-      <div className="relative h-48 overflow-hidden">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-        />
-
-        {/* Status badge */}
+    <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      {/* Image + Status Badge */}
+      <div className="relative h-52 w-full">
+        <Image src={image} alt={name} fill className="object-cover" />
+        {/* Badge positioned top-right over the image */}
         <span
-          className={`absolute top-3 left-3 text-xs font-semibold px-3 py-1 rounded-full ${
-            project.status === "Active"
-              ? "bg-amber text-forest"
-              : "bg-forest text-white"
-          }`}
+          className={`absolute top-3 right-3 text-white text-xs font-medium px-3 py-1 rounded-full
+          ${status === "Active" ? "bg-forest" : "bg-white text-forest border border-forest"}`}
         >
-          {project.status}
+          {status}
         </span>
       </div>
 
-      {/* Content */}
-      <div className="p-5 flex flex-col flex-1 gap-3">
-        {/* Location */}
-        <div className="flex items-center gap-1.5 text-forest/50 text-xs">
-          <MapPin className="w-3.5 h-3.5" />
-          <span>{project.location}</span>
-        </div>
-
-        {/* Title */}
-        <h3 className="font-serif text-lg font-bold text-forest leading-snug">
-          {project.title}
+      {/* Card Content */}
+      <div className="p-5">
+        {/* Project Name */}
+        <h3 className="font-serif font-bold text-forest text-lg mb-1">
+          {name}
         </h3>
 
-        {/* Description */}
-        <p className="text-sm text-forest/60 leading-relaxed flex-1">
-          {project.description}
-        </p>
+        {/* Location */}
+        <div className="flex items-center gap-1 text-forest/60 text-sm mb-3">
+          <MapPin size={13} />
+          <span>{location}</span>
+        </div>
 
-        {/* Progress */}
-        <div className="mt-auto pt-3 border-t border-forest/10">
-          {/* Trees count */}
-          <div className="flex items-center justify-between text-xs text-forest/60 mb-2">
-            <div className="flex items-center gap-1.5">
-              <Trees className="w-3.5 h-3.5 text-forest" />
-              <span>
-                <strong className="text-forest font-semibold">
-                  {project.treesPlanted.toLocaleString()}
-                </strong>{" "}
-                / {project.treesGoal.toLocaleString()} trees
-              </span>
-            </div>
-            <span className="font-semibold text-forest">{progress}%</span>
-          </div>
+        {/* Description — truncated to 2 lines */}
+        <p className="text-sm text-gray-500 line-clamp-2 mb-4">{description}</p>
 
-          {/* Progress bar */}
-          <div className="h-1.5 bg-sage rounded-full overflow-hidden">
-            <div
-              className="h-full bg-forest rounded-full transition-all duration-500"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
+        {/* Trees planted + percentage */}
+        <div className="flex items-center justify-between text-sm mb-2">
+          <span className="flex items-center gap-1 text-forest font-medium">
+            <TreePine size={13} />
+            {treesPlanted?.toLocaleString()} planted
+          </span>
+          <span className="text-forest/60">{percentage}%</span>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="w-full h-1.5 bg-sage rounded-full">
+          <div
+            className="h-1.5 bg-forest rounded-full transition-all"
+            style={{ width: `${percentage}%` }}
+          />
         </div>
       </div>
     </div>
