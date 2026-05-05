@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
 
   // add this to allow loading images from Unsplash
   images: {
-    domains: ["images.unsplash.com"],
+    domains: ["images.unsplash.com", "source.unsplash.com"],
   },
 };
 

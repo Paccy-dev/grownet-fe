@@ -1,3 +1,5 @@
+import { AuthProvider } from "@/context/AuthContext";
+
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
@@ -30,9 +32,11 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${inter.variable} bg-sage font-sans antialiased`}
       >
-        <Navbar />
-        <main className="pt-16">{children}</main>
-        <Footer />
+        <AuthProvider>
+          <Navbar />
+          <main className="pt-16">{children}</main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

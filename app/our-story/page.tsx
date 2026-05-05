@@ -1,45 +1,65 @@
-import { Heart, Sprout, Globe, Users } from "lucide-react";
+import StoryChapter from "@/components/our-story/StoryChapter";
+import Timeline from "@/components/our-story/Timeline";
+import Link from "next/link";
+import { TreePine } from "lucide-react";
 
+// All 4 chapters from the design
 const chapters = [
   {
-    icon: Heart,
-    tag: "The Problem",
-    title: "Morocco is Losing Its Forests",
+    number: "01",
+    tag: "THE CRISIS",
+    title: "A Land Crying for Help",
     description:
-      "Every year, thousands of hectares of Moroccan forest disappear due to drought, overgrazing, illegal logging, and wildfires. The Atlas Mountains, the Rif, and the Saharan edge are all under threat. Without intervention, entire ecosystems — and the communities that depend on them — face collapse.",
+      "Morocco loses over 30,000 hectares of forest every year to desertification, wildfires, and overgrazing. Ancient Atlas Cedar forests that once blanketed the mountains are vanishing. Oasis communities in the south watch the Sahara advance toward their homes.",
     image:
-      "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&q=80",
-    reverse: true,
-  },
-  {
-    icon: Sprout,
-    tag: "The Idea",
-    title: "A Platform Built on Transparency",
-    description:
-      "In 2023, a small team of environmentalists, developers, and community leaders came together with one idea: what if every donor could see exactly where their trees were planted? GrowNet was born as a bridge between people who want to help and the communities doing the work on the ground.",
-    image:
-      "https://images.unsplash.com/photo-1528742909443-3158b0cddca7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?q=80&w=1600&auto=format&fit=crop",
+    stats: [
+      { value: "30K+", label: "Hectares lost per year" },
+      { value: "75%", label: "Cedar forests declined" },
+    ],
     reverse: false,
   },
   {
-    icon: Globe,
-    tag: "The Mission",
-    title: "Restore 1 Million Trees by 2030",
+    number: "02",
+    tag: "THE MISSION",
+    title: "From One Seed, a Movement",
     description:
-      "Our mission is simple: plant one million verified, GPS-tracked trees across Morocco's most vulnerable regions by 2030. Every tree is tied to a real donor, a real location, and a real community. We work with local cooperatives, forestry experts, and regional authorities to ensure every planting survives and thrives.",
+      "GrowNet was born from a simple idea: what if every person, every company could plant a tree in Morocco and watch it grow? We partnered with local nurseries, ecologists, and rural cooperatives to build a transparent, tech-driven reforestation network.",
     image:
-      "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80",
+      "https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1600&auto=format&fit=crop",
+    stats: [
+      { value: "3", label: "Active regions" },
+      { value: "30K+", label: "Trees in ground" },
+    ],
     reverse: true,
   },
   {
-    icon: Users,
-    tag: "The Community",
-    title: "Powered by People Like You",
+    number: "03",
+    tag: "THE PEOPLE",
+    title: "Communities at the Heart",
     description:
-      "GrowNet is not a charity — it's a movement. Over 1,200 donors from 40 countries have already joined us. From individuals planting their first tree to corporations offsetting thousands of tonnes of CO₂, every contribution is tracked, verified, and celebrated. Together we are growing something that will outlast all of us.",
+      "Every tree planted creates work for local families. Women's cooperatives in Souss-Massa harvest Argan sustainably. Mountain communities in the Atlas maintain cedar nurseries. Oasis guardians in Draa-Tafilalet tend date palms that hold back the desert.",
     image:
-      "https://images.unsplash.com/photo-1511497584788-876760111969?w=800&q=80",
+      "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1600&auto=format&fit=crop", // people/community
+    stats: [
+      { value: "120+", label: "Families supported" },
+      { value: "15", label: "Women cooperatives" },
+    ],
     reverse: false,
+  },
+  {
+    number: "04",
+    tag: "THE FUTURE",
+    title: "A Greener Morocco by 2030",
+    description:
+      "Our goal: 1 million trees across Morocco by 2030. With your support, we're building carbon sinks, restoring biodiversity corridors, and creating green jobs. Every donation is tracked, every tree is GPS-registered, every gram of CO₂ is measured.",
+    image:
+      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop",
+    stats: [
+      { value: "1M", label: "Trees by 2030" },
+      { value: "711T", label: "CO₂ captured so far" },
+    ],
+    reverse: true,
   },
 ];
 
@@ -64,70 +84,49 @@ const teamValues = [
 
 export default function OurStoryPage() {
   return (
-    <div className="bg-sage min-h-screen">
-      {/* Page header */}
-      <div className="bg-forest py-24 px-6 text-center">
-        <div className="max-w-3xl mx-auto">
-          <p className="text-amber text-sm font-medium uppercase tracking-widest mb-4">
-            Who we are
-          </p>
-          <h1 className="font-serif text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Rooted in Purpose,
-            <br />
-            Growing for the Future
-          </h1>
-          <p className="text-white/60 text-lg leading-relaxed">
-            GrowNet started with a simple question: what if restoring nature
-            could be as transparent and personal as sending a message to a
-            friend?
-          </p>
+    <main className="min-h-screen bg-sage">
+      {/* ── Hero Banner ── */}
+      <section className="relative bg-forest text-white text-center py-20 px-4 overflow-hidden">
+        {/* Subtle floating tree icons in the background */}
+        <div className="absolute inset-0 flex flex-wrap gap-16 justify-center items-center opacity-5 pointer-events-none">
+          {Array.from({ length: 16 }).map((_, i) => (
+            <TreePine key={i} size={48} className="text-white" />
+          ))}
         </div>
-      </div>
 
-      {/* Chapters */}
-      <div className="max-w-7xl mx-auto px-6 py-24 flex flex-col gap-24">
-        {chapters.map((chapter) => {
-          const Icon = chapter.icon;
-          return (
-            <div
-              key={chapter.tag}
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                chapter.reverse ? "lg:[&>*:first-child]:order-2" : ""
-              }`}
-            >
-              {/* Text */}
-              <div className="flex flex-col gap-5">
-                <div className="inline-flex items-center gap-2 w-fit">
-                  <div className="w-8 h-8 rounded-full bg-forest flex items-center justify-center">
-                    <Icon className="w-4 h-4 text-amber" />
-                  </div>
-                  <span className="text-sm font-semibold text-forest/50 uppercase tracking-widest">
-                    {chapter.tag}
-                  </span>
-                </div>
-                <h2 className="font-serif text-4xl font-bold text-forest leading-tight">
-                  {chapter.title}
-                </h2>
-                <p className="text-forest/65 text-base leading-relaxed">
-                  {chapter.description}
-                </p>
-              </div>
+        {/* Label */}
+        <p className="relative text-white/50 text-xs uppercase tracking-widest mb-4">
+          The GrowNet Story
+        </p>
 
-              {/* Image */}
-              <div className="rounded-3xl overflow-hidden h-72 lg:h-96">
-                <img
-                  src={chapter.image}
-                  alt={chapter.title}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-            </div>
-          );
-        })}
+        {/* Headline */}
+        <h1 className="relative font-serif text-4xl md:text-6xl font-bold leading-tight mb-6">
+          Every Forest Begins
+          <br />
+          <em>With a Single Seed</em>
+        </h1>
+
+        <p className="relative text-white/50 text-sm max-w-sm mx-auto">
+          Scroll through the chapters of Morocco's reforestation journey — from
+          barren earth to thriving forests.
+        </p>
+
+        {/* Scroll indicator line */}
+        <div className="relative mt-10 w-px h-10 bg-white/20 mx-auto" />
+      </section>
+
+      {/* ── Story Chapters ── */}
+      {chapters.map((chapter) => (
+        <StoryChapter key={chapter.number} {...chapter} />
+      ))}
+
+      {/* ── Timeline ── */}
+      <div className="bg-white">
+        <Timeline />
       </div>
 
       {/* Values section */}
-      <div className="bg-forest py-20 px-6">
+      <div className="bg-forest py-20 px-6 mb-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-amber text-sm font-medium uppercase tracking-widest mb-3">
@@ -155,24 +154,23 @@ export default function OurStoryPage() {
         </div>
       </div>
 
-      {/* CTA */}
-      <div className="py-24 px-6 text-center">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="font-serif text-4xl font-bold text-forest mb-4">
-            Ready to be part of the story?
-          </h2>
-          <p className="text-forest/60 mb-8 text-base">
-            Every tree you plant becomes part of Morocco&apos;s recovery — and
-            part of your story too.
-          </p>
-          <a
-            href="/plant-trees"
-            className="inline-flex items-center gap-2 bg-forest text-white font-semibold px-8 py-4 rounded-full hover:bg-forest-mid transition-all duration-200 text-base"
-          >
-            Plant Your First Tree
-          </a>
-        </div>
-      </div>
-    </div>
+      {/* ── CTA Banner ── */}
+
+      <section className="text-center py-20 px-4">
+        <h2 className="text-forest font-serif text-3xl md:text-4xl font-bold mb-4">
+          Write the Next Chapter
+        </h2>
+        <p className="text-forest text-sm max-w-sm mx-auto mb-8">
+          Your tree is the next line in Morocco's reforestation story. Join
+          1,920 donors making it happen.
+        </p>
+        <Link
+          href="/plant-trees"
+          className="text-forest inline-flex items-center gap-2 bg-amber px-6 py-3 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
+        >
+          Plant Your Tree →
+        </Link>
+      </section>
+    </main>
   );
 }
