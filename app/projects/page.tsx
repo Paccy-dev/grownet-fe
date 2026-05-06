@@ -199,7 +199,7 @@ export default function ProjectsPage() {
           </div> */}
 
           {/* Badge */}
-          <div className="relative inline-flex items-center gap-2 bg-white/10 text-white/80 text-xs px-4 py-1.5 rounded-full mb-6">
+          <div className="relative inline-flex items-center gap-2 bg-white/10 hover:bg-amber/10 text-white/80 text-xs px-4 py-1.5 rounded-full mb-6">
             <Leaf size={12} />
             Where your trees grow
           </div>
@@ -213,32 +213,30 @@ export default function ProjectsPage() {
             Explore our verified tree planting projects around the world.
           </p>
           <div className="flex inline-flex gap-5">
-            <div>
-              <span className="font-serif text-2xl font-bold text-amber">
-                6
-              </span>
-              <p className="text-sm text-amber/50 mt-0.5">Total projects</p>
+            <div className="hover:text-amber">
+              <span className="font-serif text-2xl font-bold">6</span>
+              <p className="text-sm text-white/50 hover:text-amber/50 mt-0.5">
+                Total projects
+              </p>
             </div>
 
-            <div>
-              <span className="font-serif text-2xl font-bold text-amber">
-                4
-              </span>
-              <p className="text-sm text-amber/50 mt-0.5">Active now</p>
+            <div className="hover:text-amber">
+              <span className="font-serif text-2xl font-bold">4</span>
+              <p className="text-sm  text-white/50 hover:text-amber/50  mt-0.5">
+                Active now
+              </p>
             </div>
 
-            <div>
-              <span className="font-serif text-2xl font-bold text-amber">
-                2
-              </span>
-              <p className="text-sm text-amber/50 mt-0.5">Completed</p>
+            <div className="hover:text-amber">
+              <span className="font-serif text-2xl font-bold">2</span>
+              <p className="text-sm  text-white/50 hover:text-amber/50  mt-0.5">
+                Completed
+              </p>
             </div>
 
-            <div>
-              <span className="font-serif text-2xl font-bold text-amber">
-                75,450
-              </span>
-              <p className="text-sm text-amber/50 mt-0.5">
+            <div className="hover:text-amber">
+              <span className="font-serif text-2xl font-bold">75,450</span>
+              <p className="text-sm  text-white/50 hover:text-amber/50  mt-0.5">
                 Trees planted total
               </p>
             </div>

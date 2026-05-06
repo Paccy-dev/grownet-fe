@@ -25,7 +25,7 @@ export default function Hero() {
 
         {/* Headline */}
         <h1 className="font-serif text-5xl md:text-7xl text-white font-bold leading-tight max-w-3xl mb-6">
-          Restore Nature, <span className="text-amber">One Tree</span> at a Time
+          Plant <span className="text-amber">a Tree</span>, Change the World
         </h1>
 
         {/* Subtext */}

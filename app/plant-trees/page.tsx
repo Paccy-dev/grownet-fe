@@ -17,7 +17,7 @@ export default function PlantTreesPage() {
         </div>
 
         {/* Badge */}
-        <div className="relative inline-flex items-center gap-2 bg-white/10 text-white/80 text-xs px-4 py-1.5 rounded-full mb-6">
+        <div className="relative inline-flex items-center gap-2 bg-white/10 hover:bg-amber/10 text-white/80 text-xs px-4 py-1.5 rounded-full mb-6">
           <Leaf size={12} />
           Every tree makes a difference
         </div>

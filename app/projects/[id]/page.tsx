@@ -214,8 +214,15 @@ export default async function ProjectDetailPage({
   return (
     <>
       <main className="min-h-screen bg-sage">
-        {/* ── Hero ── */}
-        <div className="relative h-80 md:h-[28rem] w-full overflow-hidden">
+        {/* ── Hero Banner ── */}
+        <section className="relative bg-forest text-white text-center py-20 px-4 overflow-hidden">
+          {/* Subtle tree pattern in background */}
+          {/* <div className="absolute inset-0 opacity-5 pointer-events-none select-none text-[120px] flex flex-wrap gap-8 justify-center items-center overflow-hidden">
+            {Array.from({ length: 20 }).map((_, i) => (
+              <span key={i}>🌳</span>
+            ))}
+          </div> */}
+          {/* Back Image */}
           <Image
             src={project.image}
             alt={project.name}
@@ -223,7 +230,6 @@ export default async function ProjectDetailPage({
             className="object-cover scale-105"
             priority
           />
-
           {/* Layered gradient: dark at top for nav, rich at bottom for title */}
           <div className="absolute inset-0 bg-gradient-to-t from-forest via-forest/40 to-forest/20" />
 
@@ -252,37 +258,42 @@ export default async function ProjectDetailPage({
             </span>
           </div>
 
-          {/* Title block — sits above the card below, slight overlap effect */}
-          <div className="absolute bottom-0 left-0 right-0 px-6 pb-8 pt-16">
-            <div className="flex items-center gap-1.5 text-amber text-xs mb-2 tracking-wide">
-              <MapPin size={12} />
-              {project.location}
-            </div>
-            <h1 className="font-serif text-3xl md:text-5xl font-bold text-white leading-tight">
-              {project.name}
-            </h1>
-            <p className="mt-3 text-white/60 text-sm max-w-xl leading-relaxed">
-              {project.description}
-            </p>
-            {/* Impact strip */}
-            <div className="flex gap-6 mt-6 text-white">
-              <div>
-                <p className="text-2xl font-bold">
-                  {project.treesPlanted.toLocaleString()}
-                </p>
-                <p className="text-xs text-white/60">trees planted</p>
-              </div>
+          {/* Badge */}
+          <div className="relative inline-flex items-center gap-2 bg-white/10 hover:bg-amber/10 px-4 py-1.5 rounded-full mb-6 text-xs mb-2 tracking-wide">
+            <MapPin size={12} />
+            {project.location}
+          </div>
+          {/* Headline — italic "Greener" matches the design */}
+          <h1 className="relative font-serif text-4xl md:text-5xl font-bold leading-tight mb-4">
+            {project.name}
+          </h1>
 
-              <div>
-                <p className="text-2xl font-bold">{percentage}%</p>
-                <p className="text-xs text-white/60">complete</p>
-              </div>
+          <p className="relative text-white/60 text-sm max-w-md mx-auto leading-relaxed">
+            {project.description}
+          </p>
+          {/* Impact strip */}
+          <div className="relative inline-flex gap-6 mt-6 text-white">
+            <div className="hover:text-amber">
+              <p className="text-2xl font-bold">
+                {project.treesPlanted.toLocaleString()}
+              </p>
+              <p className="text-xs text-white/60 hover:text-amber/60">
+                trees planted
+              </p>
+            </div>
+
+            <div className="hover:text-amber">
+              <p className="text-2xl font-bold">{percentage}%</p>
+              <p className="text-xs text-white/60 hover:text-amber/60">
+                complete
+              </p>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* ── Body ── */}
-        <div className="max-w-4xl mx-auto px-6 py-10 space-y-6">
+        {/* <div className="max-w-4xl mx-auto bg-sage min-h-screen"> */}
+        <div className="max-w-4xl mx-auto py-10 space-y-6">
           {/* ── Progress Card ── */}
           <div className="bg-white rounded-2xl p-6 shadow-sm ring-1 ring-forest/5">
             {/* Header row */}
@@ -390,13 +401,13 @@ export default async function ProjectDetailPage({
               <div>
                 <Link
                   href="/plant-trees"
-                  className="inline-flex items-center bg-amber text-forest px-6 py-3 rounded-full font-semibold"
+                  className="inline-flex items-center bg-amber text-forest px-5 py-2 rounded-full font-semibold"
                 >
                   Plant a Tree
                   <ArrowLeft size={14} className="rotate-180" />
                 </Link>
 
-                <button className="border border-white/20 text-white px-6 py-3 rounded-full text-sm ml-3">
+                <button className="border border-white/20 text-white px-5 py-2 rounded-full text-sm ml-3">
                   View Transparency
                 </button>
               </div>
