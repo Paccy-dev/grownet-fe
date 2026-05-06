@@ -3,23 +3,26 @@ import { Trees } from "lucide-react";
 
 const quickLinks = [
   { href: "/projects", label: "Our Projects" },
-  { href: "/plant-trees", label: "Plant a Tree" },
-  { href: "/our-story", label: "Our Story" },
+  { href: "/plant-trees", label: "Plant Tree" },
+  // { href: "/our-story", label: "Our Story" },
   { href: "/transparency", label: "Transparency" },
-  { href: "/my-impact", label: "My Impact" },
+  // { href: "/my-impact", label: "My Impact" },
 ];
 
 const promises = [
-  "100% of donations go to planting",
-  "Full financial transparency",
-  "GPS-verified tree location",
-  "Annual impact reports",
+  // "100% of donations go to planting",
+  // "Full financial transparency",
+  // "GPS-verified tree location",
+  // "Annual impact reports",
+  "Every donation is tracked",
+  "Every tree is registered",
+  "Full transparency, always",
 ];
 
 export default function Footer() {
   return (
     <footer className="bg-forest text-white/80 mt-24">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div className="max-w-5xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
         {/* Brand column */}
         <div className="flex flex-col gap-4">
           <Link href="/" className="flex items-center gap-2 text-white">
@@ -27,8 +30,8 @@ export default function Footer() {
             <span className="font-serif text-lg font-semibold">GrowNet</span>
           </Link>
           <p className="text-sm leading-relaxed text-white/60">
-            Restoring Morocco&apos;s forests one tree at a time — connecting
-            donors, communities, and nature through transparent technology.
+            Making reforestation transparent, traceable, and accessible to
+            everyone.
           </p>
         </div>
 
@@ -72,7 +75,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-white/40">
+        <div className="max-w-5xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-white/40">
           <span>
             © {new Date().getFullYear()} GrowNet. All rights reserved.
           </span>

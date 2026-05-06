@@ -188,7 +188,7 @@ const projects = [
 export default function ProjectsSection() {
   return (
     <section className="py-24 bg-sage">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-5xl mx-auto px-6">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
           <div>

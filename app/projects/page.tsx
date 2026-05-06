@@ -1,4 +1,5 @@
 import ProjectCard from "@/components/projects/ProjectCard";
+import { Leaf } from "lucide-react";
 
 const projects = [
   {
@@ -186,57 +187,67 @@ const projects = [
 export default function ProjectsPage() {
   return (
     <>
-      <main className="max-w-6xl mx-auto min-h-screen bg-sage">
-        {/* Page Header */}
-        <section className="pt-16 pb-10 border-b border-forest/10">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 px-4">
-            {/* Left side (text) */}
-            <div className="max-w-lg">
-              <h1 className="font-serif text-4xl font-bold text-forest mb-3">
-                Restoration Projects
-              </h1>
-              <p className="text-forest/60 text-base">
-                Explore our verified tree planting projects around the world.
-              </p>
+      <main className="min-h-screen bg-sage">
+        {/* <main className="max-w-5xl mx-auto min-h-screen bg-sage"> */}
+        {/* ── Hero Banner ── */}
+        <section className="relative bg-forest text-white text-center py-20 px-4 overflow-hidden">
+          {/* Subtle tree pattern in background */}
+          {/* <div className="absolute inset-0 opacity-5 pointer-events-none select-none text-[120px] flex flex-wrap gap-8 justify-center items-center overflow-hidden">
+            {Array.from({ length: 20 }).map((_, i) => (
+              <span key={i}>🌳</span>
+            ))}
+          </div> */}
+
+          {/* Badge */}
+          <div className="relative inline-flex items-center gap-2 bg-white/10 text-white/80 text-xs px-4 py-1.5 rounded-full mb-6">
+            <Leaf size={12} />
+            Where your trees grow
+          </div>
+
+          {/* Headline — italic "Greener" matches the design */}
+          <h1 className="relative font-serif text-4xl md:text-5xl font-bold leading-tight mb-4">
+            Restoration Progects
+          </h1>
+
+          <p className="relative text-white/60 text-sm max-w-md mx-auto mb-4">
+            Explore our verified tree planting projects around the world.
+          </p>
+          <div className="flex inline-flex gap-5">
+            <div>
+              <span className="font-serif text-2xl font-bold text-amber">
+                6
+              </span>
+              <p className="text-sm text-amber/50 mt-0.5">Total projects</p>
             </div>
 
-            {/* Right side (stats) */}
-            <div className="flex flex-wrap gap-8">
-              <div>
-                <span className="font-serif text-2xl font-bold text-forest">
-                  6
-                </span>
-                <p className="text-sm text-forest/50 mt-0.5">Total projects</p>
-              </div>
+            <div>
+              <span className="font-serif text-2xl font-bold text-amber">
+                4
+              </span>
+              <p className="text-sm text-amber/50 mt-0.5">Active now</p>
+            </div>
 
-              <div>
-                <span className="font-serif text-2xl font-bold text-forest">
-                  4
-                </span>
-                <p className="text-sm text-forest/50 mt-0.5">Active now</p>
-              </div>
+            <div>
+              <span className="font-serif text-2xl font-bold text-amber">
+                2
+              </span>
+              <p className="text-sm text-amber/50 mt-0.5">Completed</p>
+            </div>
 
-              <div>
-                <span className="font-serif text-2xl font-bold text-forest">
-                  2
-                </span>
-                <p className="text-sm text-forest/50 mt-0.5">Completed</p>
-              </div>
-
-              <div>
-                <span className="font-serif text-2xl font-bold text-forest">
-                  75,450
-                </span>
-                <p className="text-sm text-forest/50 mt-0.5">
-                  Trees planted total
-                </p>
-              </div>
+            <div>
+              <span className="font-serif text-2xl font-bold text-amber">
+                75,450
+              </span>
+              <p className="text-sm text-amber/50 mt-0.5">
+                Trees planted total
+              </p>
             </div>
           </div>
         </section>
 
         {/* Projects Grid */}
-        <section className="px-4 pb-20 pt-10">
+        <section className="max-w-5xl mx-auto px-4 pb-20 pt-10">
+          {/* <section className="max-w-5xl mx-auto min-h-screen bg-sage"> */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
               <ProjectCard key={project.id} project={project} />

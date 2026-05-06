@@ -23,7 +23,7 @@ export default function LoginPrompt() {
   return (
     <div className="bg-sage min-h-screen">
       <div className="bg-forest py-20 px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <p className="text-amber text-sm font-medium uppercase tracking-widest mb-3">
             Your personal dashboard
           </p>
@@ -37,7 +37,7 @@ export default function LoginPrompt() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-16">
+      <div className="max-w-5xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left — feature preview */}
           <div className="flex flex-col gap-6">

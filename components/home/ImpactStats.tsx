@@ -30,7 +30,7 @@ const stats = [
 export default function ImpactStats() {
   return (
     <section className="bg-white py-16 border-b border-sage">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-5xl mx-auto px-6">
         {/* Section label */}
         <p className="text-center text-sm font-medium text-forest/50 uppercase tracking-widest mb-10">
           Our impact so far

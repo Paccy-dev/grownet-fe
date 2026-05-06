@@ -115,7 +115,7 @@ export default function MyImpactDashboard({ user }: { user: User }) {
     <div className="bg-sage min-h-screen">
       {/* Header */}
       <div className="bg-forest py-20 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <p className="text-amber text-sm font-medium uppercase tracking-widest mb-3">
               Your dashboard
@@ -135,7 +135,7 @@ export default function MyImpactDashboard({ user }: { user: User }) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col gap-12">
+      <div className="max-w-5xl mx-auto px-6 py-12 flex flex-col gap-12">
         {/* Impact stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {impactStats.map((stat) => {

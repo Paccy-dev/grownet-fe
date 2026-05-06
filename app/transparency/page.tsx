@@ -464,7 +464,7 @@ export default function TransparencyPage() {
                     raised
                   </span>
                 </div>
-                <button className="flex-shrink-0 text-xs font-semibold text-forest border border-forest/20 px-4 py-2 rounded-full hover:bg-forest hover:text-white transition-all duration-200">
+                <button className="flex-shrink-0 text-xs font-semibold text-forest border border-amber px-4 py-2 rounded-full hover:bg-forest hover:text-white transition-all duration-200">
                   Download PDF
                 </button>
               </div>

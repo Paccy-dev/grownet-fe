@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const projectLocations = [
   {
@@ -22,6 +22,15 @@ const projectLocations = [
     species: "Argan Tree",
   },
   {
+    id: 3,
+    name: "Rif Mountain Reforestation",
+    location: "Chefchaouen, Rif",
+    trees: 25000,
+    lat: 35.1688,
+    lng: -5.2636,
+    species: "Holm Oak",
+  },
+  {
     id: 4,
     name: "Saharan Edge Greening",
     location: "Draa-Tafilalet",
@@ -40,15 +49,6 @@ const projectLocations = [
     species: "Aleppo Pine",
   },
   {
-    id: 3,
-    name: "Rif Mountain Reforestation",
-    location: "Chefchaouen, Rif",
-    trees: 25000,
-    lat: 35.1688,
-    lng: -5.2636,
-    species: "Holm Oak",
-  },
-  {
     id: 6,
     name: "High Atlas Juniper Revival",
     location: "Ouarzazate, High Atlas",
@@ -61,16 +61,17 @@ const projectLocations = [
 
 export default function LiveTreeMap() {
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<unknown>(null);
+  const mapInstanceRef = useRef<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!mapRef.current || mapInstanceRef.current) return;
 
-    // Dynamically import Leaflet only on the client
+    let map: any;
+
     import("leaflet").then((L) => {
-      // Fix default marker icons broken by webpack
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       delete (L.Icon.Default.prototype as any)._getIconUrl;
+
       L.Icon.Default.mergeOptions({
         iconRetinaUrl:
           "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
@@ -79,57 +80,67 @@ export default function LiveTreeMap() {
           "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
       });
 
-      // Create map centered on Morocco
-      const map = L.map(mapRef.current!).setView([31.7917, -7.0926], 5);
+      map = L.map(mapRef.current!).setView([31.7917, -7.0926], 5);
 
-      // Tile layer — OpenStreetMap
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "© OpenStreetMap contributors",
       }).addTo(map);
 
-      // Custom green marker icon
       const greenIcon = L.divIcon({
         className: "",
         html: `<div style="
           background:#1a3d2b;
           color:white;
-          border-radius:50%;
-          width:36px;
-          height:36px;
+          border-radius:999px;
+          width:38px;
+          height:38px;
           display:flex;
           align-items:center;
           justify-content:center;
-          font-size:16px;
-          border:3px solid #d4a017;
-          box-shadow:0 2px 8px rgba(0,0,0,0.3);
+          font-size:14px;
+          border:2px solid #d4a017;
+          box-shadow:0 4px 12px rgba(0,0,0,0.25);
         ">🌳</div>`,
-        iconSize: [36, 36],
-        iconAnchor: [18, 18],
+        iconSize: [38, 38],
+        iconAnchor: [19, 19],
       });
 
-      // Add markers
-      projectLocations.forEach((project) => {
-        const marker = L.marker([project.lat, project.lng], {
-          icon: greenIcon,
-        }).addTo(map);
+      projectLocations.forEach((p) => {
+        const marker = L.marker([p.lat, p.lng], { icon: greenIcon }).addTo(map);
+
+        const size = p.trees > 20000 ? "large" : "normal";
 
         marker.bindPopup(`
-          <div style="font-family:sans-serif;min-width:180px">
-            <p style="font-weight:700;color:#1a3d2b;margin:0 0 4px">${project.name}</p>
-            <p style="color:#666;font-size:12px;margin:0 0 6px">📍 ${project.location}</p>
-            <p style="color:#666;font-size:12px;margin:0 0 2px">🌳 ${project.trees.toLocaleString()} trees planted</p>
-            <p style="color:#666;font-size:12px;margin:0">🌿 Species: ${project.species}</p>
+          <div class="text-sm font-sans min-w-[200px]">
+            <div class="font-bold text-[#1a3d2b] mb-1">${p.name}</div>
+            <div class="text-gray-500 text-xs mb-2">📍 ${p.location}</div>
+
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span>🌳 Trees</span>
+              <span class="font-semibold">${p.trees.toLocaleString()}</span>
+            </div>
+
+            <div class="flex items-center justify-between text-xs">
+              <span>🌿 Species</span>
+              <span class="font-medium">${p.species}</span>
+            </div>
+
+            <div class="mt-3 h-1 bg-gray-200 rounded-full overflow-hidden">
+              <div class="h-full bg-[#1a3d2b]" style="width:${
+                size === "large" ? "100%" : "60%"
+              }"></div>
+            </div>
           </div>
         `);
       });
 
       mapInstanceRef.current = map;
+      setLoading(false);
     });
 
-    // Cleanup on unmount
     return () => {
       if (mapInstanceRef.current) {
-        (mapInstanceRef.current as { remove: () => void }).remove();
+        mapInstanceRef.current.remove();
         mapInstanceRef.current = null;
       }
     };
@@ -137,39 +148,48 @@ export default function LiveTreeMap() {
 
   return (
     <div className="mt-16">
-      {/* Section header */}
+      {/* Header */}
       <div className="text-center mb-8">
-        <p className="text-sm font-medium text-forest/50 uppercase tracking-widest mb-3">
+        <p className="text-xs tracking-widest uppercase text-forest/50">
           Live Tree Map
         </p>
-        <h2 className="font-serif text-4xl font-bold text-forest mb-3">
+        <h2 className="font-serif text-4xl font-bold text-forest">
           Every Tree on the Map
         </h2>
-        <p className="text-forest/60 text-base max-w-lg mx-auto">
-          Explore where your donations come to life. Each marker represents real
-          trees planted across Morocco&apos;s restoration regions.
+        <p className="text-forest/60 text-sm max-w-lg mx-auto mt-2">
+          Explore where your donations come to life across Morocco’s
+          reforestation zones.
         </p>
       </div>
 
-      {/* Map container */}
-      <div className="rounded-3xl overflow-hidden border border-forest/10 shadow-sm">
-        {/* Leaflet CSS */}
+      {/* Map */}
+      <div className="relative rounded-3xl overflow-hidden border border-forest/10">
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-sage">
+            <p className="text-forest/60 text-sm animate-pulse">
+              Loading map...
+            </p>
+          </div>
+        )}
+
         <link
+          className="z-0"
           rel="stylesheet"
           href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         />
-        <div ref={mapRef} className="w-full h-[480px]" />
+
+        <div ref={mapRef} className="w-full h-[500px]" />
       </div>
 
       {/* Legend */}
-      <div className="flex flex-wrap items-center justify-center gap-6 mt-5">
+      <div className="flex flex-wrap justify-center gap-4 mt-5">
         {projectLocations.map((p) => (
           <div
             key={p.id}
-            className="flex items-center gap-1.5 text-xs text-forest/60"
+            className="text-xs text-forest/60 flex items-center gap-2"
           >
-            <span className="w-2 h-2 rounded-full bg-forest inline-block" />
-            {p.name.split(" ").slice(0, 2).join(" ")}
+            <span className="w-2 h-2 rounded-full bg-forest" />
+            {p.name}
           </div>
         ))}
       </div>

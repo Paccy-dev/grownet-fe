@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Leaf, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Leaf, ShieldCheck } from "lucide-react";
 
 // Preset donation amounts shown as buttons
 const AMOUNTS = [10, 25, 50, 100, 250, 500];
@@ -93,156 +93,160 @@ export default function DonationForm() {
   const co2Offset = treesPlanted * species.co2;
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-      {/* Toggle: Give Monthly / Give Once */}
-      <div className="flex justify-center mb-6">
-        <div className="bg-sage rounded-full p-1 flex gap-1">
-          {(["monthly", "once"] as const).map((f) => (
-            <button
-              key={f}
-              onClick={() => setFrequency(f)}
-              className={`flex items-center gap-1.5 px-5 py-2 rounded-full text-sm font-medium transition-colors
+    <>
+      <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+        {/* Toggle: Give Monthly / Give Once */}
+        <div className="flex justify-center mb-6">
+          <div className="bg-sage rounded-full p-1 flex gap-1">
+            {(["monthly", "once"] as const).map((f) => (
+              <button
+                key={f}
+                onClick={() => setFrequency(f)}
+                className={`flex items-center gap-1.5 px-5 py-2 rounded-full text-sm font-medium transition-colors
                 ${
                   frequency === f
                     ? "bg-forest text-white"
                     : "text-forest/60 hover:text-forest"
                 }`}
-            >
-              <Leaf size={13} />
-              {f === "monthly" ? "Give Monthly" : "Give Once"}
-            </button>
-          ))}
+              >
+                <Leaf size={13} />
+                {f === "monthly" ? "Give Monthly" : "Give Once"}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* Amount Selector */}
-      <p className="text-sm font-medium text-forest mb-3">
-        Choose the Amount to Give
-      </p>
-      <div className="grid grid-cols-3 gap-2 mb-3">
-        {AMOUNTS.map((a) => (
-          <button
-            key={a}
-            onClick={() => {
-              setAmount(a);
-              setCustomAmount("");
-            }}
-            className={`py-2.5 rounded-xl text-sm font-medium border transition-colors
+        {/* Amount Selector */}
+        <p className="text-sm font-semibold text-forest mb-3">
+          Choose the Amount to Give
+        </p>
+        <div className="grid grid-cols-3 gap-2 mb-3">
+          {AMOUNTS.map((a) => (
+            <button
+              key={a}
+              onClick={() => {
+                setAmount(a);
+                setCustomAmount("");
+              }}
+              className={`py-2.5 rounded-xl text-sm font-medium border transition-colors
               ${
                 amount === a && !customAmount
                   ? "bg-forest text-white border-forest"
                   : "bg-white text-forest border-gray-200 hover:border-forest"
               }`}
-          >
-            ${a}
-          </button>
-        ))}
-      </div>
+            >
+              ${a}
+            </button>
+          ))}
+        </div>
 
-      {/* Custom Amount Input */}
-      <div className="flex items-center border border-gray-200 rounded-xl px-4 py-2.5 mb-6 focus-within:border-forest transition-colors">
-        <span className="text-forest/50 mr-2 text-sm">$</span>
-        <input
-          type="number"
-          placeholder="Custom amount"
-          value={customAmount}
-          onChange={(e) => {
-            setCustomAmount(e.target.value);
-            setAmount(0);
-          }}
-          className="flex-1 outline-none text-sm text-forest placeholder:text-forest/30"
-        />
-      </div>
+        {/* Custom Amount Input */}
+        <div className="flex items-center border border-gray-200 rounded-xl px-4 py-2.5 mb-6 focus-within:border-forest transition-colors">
+          <span className="text-forest/50 mr-2 text-sm">$</span>
+          <input
+            type="number"
+            placeholder="Custom amount"
+            value={customAmount}
+            onChange={(e) => {
+              setCustomAmount(e.target.value);
+              setAmount(0);
+            }}
+            className="flex-1 outline-none text-sm text-forest placeholder:text-forest/30"
+          />
+        </div>
 
-      {/* Project Selector */}
-      <p className="text-sm font-medium text-forest mb-3 flex items-center gap-1">
-        <Leaf size={13} /> Select a Project
-      </p>
-      <div className="grid grid-cols-2 gap-2 mb-6">
-        {PROJECTS.map((p) => (
-          <button
-            key={p.id}
-            onClick={() => setSelectedProject(p.id)}
-            className={`text-left p-3 rounded-xl border text-sm transition-colors
+        {/* Project Selector */}
+        <p className="text-sm font-semibold text-forest mb-3 flex items-center gap-1">
+          <Leaf size={13} /> Select a Project
+        </p>
+        <div className="grid grid-cols-2 gap-2 mb-6">
+          {PROJECTS.map((p) => (
+            <button
+              key={p.id}
+              onClick={() => setSelectedProject(p.id)}
+              className={`text-left p-3 rounded-xl border text-sm transition-colors
               ${
                 selectedProject === p.id
                   ? "border-forest bg-forest/5"
                   : "border-gray-200 hover:border-forest/50"
               }`}
-          >
-            <div className="flex items-center gap-2 mb-1">
-              {/* Colored dot indicator */}
-              <span className="w-5 h-5 rounded-full bg-forest/20 flex items-center justify-center text-xs text-forest font-bold">
-                {p.name[0]}
-              </span>
-              <span className="font-medium text-forest">{p.name}</span>
-            </div>
-            <p className="text-forest/50 text-xs ml-7">{p.location}</p>
-          </button>
-        ))}
-      </div>
+            >
+              <div className="flex items-center gap-2 mb-1">
+                {/* Colored dot indicator */}
+                <span className="w-5 h-5 rounded-full bg-forest/20 flex items-center justify-center text-xs text-forest font-bold">
+                  {p.name[0]}
+                </span>
+                <span className="font-medium text-forest">{p.name}</span>
+              </div>
+              <p className="text-forest/50 text-xs ml-7">{p.location}</p>
+            </button>
+          ))}
+        </div>
 
-      {/* Species Selector */}
-      <p className="text-sm font-medium text-forest mb-3 flex items-center gap-1">
-        <Leaf size={13} /> Choose Tree Species
-      </p>
-      <div className="grid grid-cols-3 gap-2 mb-6">
-        {SPECIES.map((s) => (
-          <button
-            key={s.id}
-            onClick={() => setSelectedSpecies(s.id)}
-            className={`text-left p-3 rounded-xl border text-xs transition-colors
+        {/* Species Selector */}
+        <p className="text-sm font-semibold text-forest mb-3 flex items-center gap-1">
+          <Leaf size={13} /> Choose Tree Species
+        </p>
+        <div className="grid grid-cols-3 gap-2 mb-6">
+          {SPECIES.map((s) => (
+            <button
+              key={s.id}
+              onClick={() => setSelectedSpecies(s.id)}
+              className={`text-left p-3 rounded-xl border text-xs transition-colors
               ${
                 selectedSpecies === s.id
                   ? "border-forest bg-forest/5"
                   : "border-gray-200 hover:border-forest/50"
               }`}
-          >
-            <p className="font-semibold text-forest mb-1">{s.name}</p>
-            <p className="text-forest/50 line-clamp-2 mb-2">{s.description}</p>
-            <div className="flex justify-between">
-              <span className="text-forest/60">{s.co2}kg CO₂/yr</span>
-              <span className="text-forest font-medium">${s.price}/tree</span>
-            </div>
-          </button>
-        ))}
-      </div>
+            >
+              <p className="font-semibold text-forest mb-1">{s.name}</p>
+              <p className="text-forest/50 line-clamp-2 mb-2">
+                {s.description}
+              </p>
+              <div className="flex justify-between">
+                <span className="text-forest/60">{s.co2}kg CO₂/yr</span>
+                <span className="text-forest font-medium">${s.price}/tree</span>
+              </div>
+            </button>
+          ))}
+        </div>
 
-      {/* Your Impact Summary */}
-      <div className="mb-6">
-        <p className="text-sm font-medium text-forest mb-3 flex items-center gap-1">
-          🌱 Your Impact
-        </p>
-        <div className="grid grid-cols-3 gap-3">
-          <div className="bg-sage rounded-xl p-3 text-center">
-            <p className="text-forest font-bold text-lg">{treesPlanted}</p>
-            <p className="text-forest/50 text-xs">Trees Planted</p>
-          </div>
-          <div className="bg-sage rounded-xl p-3 text-center">
-            <p className="text-forest font-bold text-lg">
-              {co2Offset} <span className="text-xs">kg</span>
-            </p>
-            <p className="text-forest/50 text-xs">CO₂/year offset</p>
-          </div>
-          <div className="bg-sage rounded-xl p-3 text-center">
-            <p className="text-amber font-bold text-lg">${activeAmount}</p>
-            <p className="text-forest/50 text-xs">
-              {frequency === "once" ? "One Time" : "Per Month"}
-            </p>
+        {/* Your Impact Summary */}
+        <div className="mb-6">
+          <p className="text-sm font-semibold text-forest mb-3 flex items-center gap-1">
+            <Leaf size={13} /> Your Impact
+          </p>
+          <div className="grid grid-cols-3 gap-3">
+            <div className="bg-forest/70 rounded-xl p-3 text-center">
+              <p className="text-white font-bold text-lg">{treesPlanted}</p>
+              <p className="text-white/50 text-xs">Trees Planted</p>
+            </div>
+            <div className="bg-forest/70 rounded-xl p-3 text-center">
+              <p className="text-white font-bold text-lg">
+                {co2Offset} <span className="text-xs">kg</span>
+              </p>
+              <p className="text-white/50 text-xs">CO₂/year offset</p>
+            </div>
+            <div className="bg-forest/70 rounded-xl p-3 text-center">
+              <p className="text-white font-bold text-lg">${activeAmount}</p>
+              <p className="text-white/50 text-xs">
+                {frequency === "once" ? "One Time" : "Per Month"}
+              </p>
+            </div>
           </div>
         </div>
+
+        {/* Complete Donation Button */}
+        <button className="w-full bg-forest text-white py-4 rounded-xl font-semibold text-base hover:bg-forest hover:text-amber hover:border hover:border-amber transition-colors">
+          Complete Donation → ${activeAmount}
+        </button>
+
+        {/* Security note */}
+        <p className="text-center text-xs text-forest/40 mt-3 flex items-center justify-center gap-1">
+          <ShieldCheck size={12} />
+          Secure payment · This is a demo — no real payment processed.
+        </p>
       </div>
-
-      {/* Complete Donation Button */}
-      <button className="w-full bg-forest text-white py-4 rounded-xl font-semibold text-base hover:bg-forest-mid transition-colors">
-        Complete Donation — ${activeAmount}
-      </button>
-
-      {/* Security note */}
-      <p className="text-center text-xs text-forest/40 mt-3 flex items-center justify-center gap-1">
-        <ShieldCheck size={12} />
-        Secure payment · This is a demo — no real payment processed.
-      </p>
-    </div>
+    </>
   );
 }

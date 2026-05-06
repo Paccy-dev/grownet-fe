@@ -392,11 +392,11 @@ export default async function ProjectDetailPage({
                   href="/plant-trees"
                   className="inline-flex items-center bg-amber text-forest px-6 py-3 rounded-full font-semibold"
                 >
-                  🌱 Plant a Tree
+                  Plant a Tree
                   <ArrowLeft size={14} className="rotate-180" />
                 </Link>
 
-                <button className="border border-white/20 text-white px-6 py-3 rounded-full text-sm">
+                <button className="border border-white/20 text-white px-6 py-3 rounded-full text-sm ml-3">
                   View Transparency
                 </button>
               </div>

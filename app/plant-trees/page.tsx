@@ -7,9 +7,6 @@ import { Leaf } from "lucide-react";
 export default function PlantTreesPage() {
   return (
     <main className="min-h-screen bg-sage">
-      {/* ── Navbar ── */}
-      <Navbar />
-
       {/* ── Hero Banner ── */}
       <section className="relative bg-forest text-white text-center py-20 px-4 overflow-hidden">
         {/* Subtle tree pattern in background */}

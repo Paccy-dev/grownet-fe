@@ -10,7 +10,7 @@ const partners = [
 export default function TrustedBy() {
   return (
     <section className="bg-sage py-14 border-b border-forest/10">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-5xl mx-auto px-6">
         {/* Label */}
         <p className="text-center text-sm font-medium text-forest/40 uppercase tracking-widest mb-10">
           Trusted by leading Moroccan organizations

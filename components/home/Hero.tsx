@@ -16,7 +16,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-forest/60" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-24">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 py-24">
         {/* Badge */}
         <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm px-4 py-2 rounded-full mb-8">
           <Leaf className="w-4 h-4 text-amber" />
